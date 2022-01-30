@@ -19,20 +19,21 @@ app.use(express.urlencoded({ extended: true }));
 const db = require("./app/models");
 const Role = db.role;
 
-db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Successfully connect to MongoDB.");
-    initial();
-  })
-  .catch(err => {
-    console.error("Connection error", err);
-    process.exit();
-  });
-// db.mongoose.connect(dbConfig.url)
+// db.mongoose
+//   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   })
+//   .then(() => {
+//     console.log("Successfully connect to MongoDB.");
+//     initial();
+//   })
+//   .catch(err => {
+//     console.error("Connection error", err);
+//     process.exit();
+//   });
+
+db.mongoose.connect(dbConfig.url)
 
 // simple route
 app.get("/", (req, res) => {
@@ -44,8 +45,6 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/quiz.routes")(app);
 require("./app/routes/question.routes")(app);
-require("./app/routes/submission.routes")(app);
-require("./app/routes/result.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

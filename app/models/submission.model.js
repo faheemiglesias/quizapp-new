@@ -8,16 +8,16 @@ const Submission = mongoose.model(
       ref: 'usermodels'
     },
     quiz: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'QuizModel'
+      quizId: mongoose.Schema.Types.ObjectId,
+      score: Number,
+      ref: 'quizmodels',
     },
     answers: [{
       question: {
-        type: mongoose.Schema.Types.ObjectId,
+        qId: mongoose.Schema.Types.ObjectId,
         ref: 'questionmodels',
-        score: Number
       }
-    }]
+    }],
   })
 );
 
